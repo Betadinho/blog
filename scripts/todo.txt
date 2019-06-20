@@ -1,0 +1,32 @@
+1: important 2:primary 3:secondary 4:optional
+
+TODO for minimal viable product:
+
+
+	# 1 registration form validate against confirm password
+	# 1 create and handle sessions (no session created on login yet)
+
+	# 2 build visualisation for articles to be displayed
+	# 2 Add 1 Row with 3 columns to index.php to fill with Collections containing articles pulled from db
+	# 2 make crud
+
+	# 3 logout function and specific changes to displayed components like nav bar (add logout button, remove login/register for example)
+
+	# 2 add form validation everywhere: emails, passwords
+	# 2 validate, check for empty and clean form input with trim()
+
+	# 2 make login/registration/posts in general go trough ajax
+		- never again get redirected for no reason!
+
+
+
+
+
+	# 4 get working side bar with Top, hot, recent etc.
+
+	# 4 in nav.php -> mobile-links sidenav ul:
+	-	remove login/register modals or find a way to implement them for mobile
+	-	if not fixable, find new way for mobile users to login (build login/register sites)
+
+
+	#DONE
