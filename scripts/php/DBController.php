@@ -1,69 +1,40 @@
 <?php
+
+//Probalby deprecated artifat: Refactored and moved functionality to authController and later Crud Controller
 require 'configure.php';
+require 'auth/login.php';
+require 'auth/register.php';
 
-if(isset($_POST['submit'])) {
-  $username = $_POST['name'];
-  $email = $_POST['email'];
-  $password = $_POST['password'];
-  createUser($username, $password, $email);
-  echo 'User Registered!';
+$username = $email = $password = $passwordConfirm = "";
+$method = $_SERVER['REQUEST_METHOD'];
+
+switch ($method) {
+    case 'GET':
+        // code...
+        // CALL Login Method
+        break;
+    case 'POST':
+        // code...
+        //CALL REGISTER METHOD AND PAS VALUES
+        break;
+    default:
+        // code...
+        break;
 }
 
-if (isset($_POST['login'])) {
-  // code...
-  $username = $_POST['name'];
-  $password = $_POST['password'];
-  login($username, $password);
-}
 
-function createUser($username, $password, $email) {
-  $dbh = connect();
-    if ($dbh) {
-      try {
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $createUser = $dbh->prepare('INSERT INTO users (username, email, password) VALUES(:username, :email, :password)');
-        $createUser->bindParam(':username', $username);
-        $createUser->bindParam(':email', $email);
-        $createUser->bindParam(':password', $hashedPassword);
 
-        $dbh->beginTransaction();
-        $createUser->execute();
-        $dbh->commit();
-        echo "User created\n";
-      } catch (PDOException $e) {
-        $dbh->rollBack();
-        die("Error while creating user: " . $e->getMessage() . "\n");
-      }
-
-    }
-}
-
-function login($username, $password) {
-  $dbh = connect();
-    if ($dbh) {
-      try {
-          $getPassword = $dbh->prepare('SELECT password FROM users WHERE username=:username' );
-          $getPassword->bindParam('username', $username);
-          $dbh->beginTransaction();
-          $getPassword->execute();
-          $dbh->commit();
-          $hash = $getPassword->fetchAll(\PDO::FETCH_COLUMN);
-          $hash = $hash[0];
-          if (password_verify($password, $hash)) {
-            echo 'it worked';
-          } else {
-            echo "couldnt log in \n";
-          }
-        } catch (PDOException $e) {
-          die("Error while loggin in: " . $e->getMessage(). "\n");
-        }
-
-    }
+function fixInput($data) { //remove potentially harmful characters from input
+    $data = trim($data);;
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
 function listUsers() {
   listUsersInterface();
 }
+
 function listUsersInterface() {
   $dbh = connect();
     if ($dbh) {

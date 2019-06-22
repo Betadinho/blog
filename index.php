@@ -15,7 +15,7 @@
 <body>
 
       <!-- Navbar goes here -->
-  <?php require 'templates/nav.php'; ?>
+  <?php require_once 'templates/nav.php'; ?>
   <!-- Page Layout here -->
   <div class="container center">
           <?php //include 'templates/sidebar.php'; ?>
@@ -25,7 +25,8 @@
 
             <?php
             //include 'scripts/createdb.php';
-            include 'scripts/DBController.php';
+            include_once 'scripts/php/auth/authController.php';
+            //include 'scripts/php/auth/authController.php';
             include 'templates/cards.php';
             ?>
 

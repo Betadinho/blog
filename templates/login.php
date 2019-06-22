@@ -3,17 +3,17 @@
    <h3 class="center">Login</h3>
    <br>
   <div class="container center">
-       <form action="/blog/scripts/DBController.php" method="post">
+       <form action="/blog/scripts/php/auth/authController.php" method="get">
            <div class="row">
                <div class="input-field col s12">
-                   <input id="name" type="text" name="name">
+                   <input id="name" type="text" name="name" required>
                    <label for="name">User Name</label>
                </div>
            </div>
 
            <div class="row">
                <div class="input-field col s12">
-                   <input id="password" type="text" name="password">
+                   <input id="password" type="text" name="password" required>
                    <label for="password">Password</label>
                </div>
            </div>
