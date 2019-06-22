@@ -6,22 +6,22 @@
        <form action="/blog/scripts/php/auth/authController.php" method="post">
            <div class="row">
                <div class="input-field col s12">
-                   <input id="name" type="text" name="name" required>
-                   <label for="name">User Name</label>
+                   <input id="register-name" type="text" name="name" required>
+                   <label for="register-name">User Name</label>
                </div>
            </div>
 
            <div class="row">
                <div class="input-field col s12">
-                   <input id="email" type="email" name="email" class="validate" required>
-                   <label for="email">Email</label>
+                   <input id="register-email" type="email" name="email" class="validate" required>
+                   <label for="register-email">Email</label>
                </div>
            </div>
 
            <div class="row">
                <div class="input-field col s5">
-                   <input id="password" type="password" name="password" autocomplete="off" required>
-                   <label for="password">Password</label>
+                   <input id="register-password" type="password" name="password" autocomplete="off" required>
+                   <label for="register-password">Password</label>
                </div>
                 <div class="input-field col s5 right">
                     <input id="confirmPassword" type="password" name="confirmPassword" autocomplete="off" required>

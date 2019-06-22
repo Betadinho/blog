@@ -34,15 +34,15 @@
               <?php
                   listUsers();
 
-                  for ($i=1; $i < 4; $i++) {
-                    small_thumb_slide('testing shit' . $i, 'http://lorempixel.com/output/technics-q-c-640-480-'. $i .'.jpg');
-                  }
-                  for ($i=1; $i < 4; $i++) {
-                    big_thumb_normal();
-                  }
-                  for ($i=1; $i < 4; $i++) {
-                    big_thumb_slide();
-                  }
+                  // for ($i=1; $i < 4; $i++) {
+                  //   small_thumb_slide('testing shit' . $i, 'http://lorempixel.com/output/technics-q-c-640-480-'. $i .'.jpg');
+                  // }
+                  // for ($i=1; $i < 4; $i++) {
+                  //   big_thumb_normal();
+                  // }
+                  // for ($i=1; $i < 4; $i++) {
+                  //   big_thumb_slide();
+                  // }
                 ?>
               </div>
 

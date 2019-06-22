@@ -5,21 +5,55 @@ require 'register.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 
+/*
+Determin what type of request was made and act accordingly:
+GET: check User credentials against db and give Session when correct
+POST: Register User
+*/
 switch ($method) {
     case 'GET':
         // code...
         // CALL Login Method
-        login();
+        if (isset($_GET['login'])) {
+          // code...
+          $username = fixInput($_POST['name']);
+          $password = fixInput($_POST['password']);
+          $password = fixInput($_POST['confirmPassword']);
+
+          if ($password === $passwordConfirm) {
+              checkUser($username, $password);
+          } else {
+              echo "Passwords must identical to each other";
+          }
+          unset($password);
+        }
         break;
     case 'POST':
         // code...
         //CALL REGISTER METHOD AND PAS VALUES
-        register();
+        if(isset($_POST['register'])) {
+            $username = fixInput($_POST['name']);
+            $email = fixInput($_POST['email']);
+            $password = fixInput($_POST['password']);
+            $passwordConfirm = fixInput($_POST['confirmPassword']);
+
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                createUser($username, $password, $email);
+            }
+            unset($password);
+        }
         break;
     default:
-        // code...
         break;
+    }
+
+function fixInput($data) { //remove potentially harmful characters from input
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
+
 
 function listUsers() {
   listUsersInterface();
