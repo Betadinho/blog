@@ -1,7 +1,20 @@
 <?php
+
+function testArticle() {
+    echo '
+        <li class="collection-item col s12">
+            <div>
+                <a href="#"><h4>Test Article</h4></a>
+                <p class="flow-text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos,
+                </p>
+            </div>
+        </li>
+    ';
+}
 function small_thumb_slide($title, $image) {
   echo '
-    <div class="col s12 m6 l4">
+    <div class="col s12 m4 l4">
         <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="'. $image .'">

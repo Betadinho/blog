@@ -1,7 +1,7 @@
 <?php
 require_once 'configure.php';
 
-function createUser($username, $password, $email) {
+function createUser($username, $password, $email) { //input arguments already validated and cleaned!
     $dbh = connect();
     if ($dbh) {
         try {
@@ -9,6 +9,7 @@ function createUser($username, $password, $email) {
             $getEmail = $dbh->prepare('SELECT * FROM users WHERE email=:email');
             $getEmail->bindParam(':email', $email);
 
+            // Query DB for Users with matching email
             $getUsername = $dbh->prepare('SELECT * FROM users WHERE username=:username');
             $getUsername->bindParam(':username', $username);
 
@@ -21,10 +22,14 @@ function createUser($username, $password, $email) {
 
             $dbh->commit();
 
+            //Check for users already registered with the input username and email
             $noMatchingUser = true;
+            //Handle what happens if the user already exists
             if ($getEmail != null && $getUsername != null) {
                 $noMatchingUser = false;
-                header("location: ../../../index.php");
+                $URL="../../../index.php";
+                echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+                echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
             }
 
             unset($getEmail);
@@ -43,7 +48,9 @@ function createUser($username, $password, $email) {
                 if ($createUser->execute()) {
                     //Redirect to home
                     $dbh->commit();
-                    header("location: ../../../index.php");
+                    $URL = '../../../index.php';
+                    echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+                    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
                 } else {
                     echo "Something went wrong";
                 }

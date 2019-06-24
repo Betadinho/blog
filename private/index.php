@@ -1,10 +1,20 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if ( !(isset($_SESSION['username'])) ) {
+    header('location: ../');
+    exit;
+}
+require_once '../scripts/php/auth/configure.php';
+?>
+
 <html lang="en">
 <head>
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/blog/styles/main.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,70 +23,70 @@
 </head>
 <body>
 
-    <!-- Navbar goes here -->
-    <?php require '../templates/nav.php'; ?>
-    <!-- Page Layout here -->
-        <div class="row">
-            <div class="col s12 m4 l2">
-                <!-- Note that "m4 l3" was added -->
-                <!-- Grey navigation panel
+      <!-- Navbar goes here -->
+  <?php require_once '../templates/nav_private.php'; ?>
+  <!-- Page Layout here -->
+  <div class="container center">
+          <?php //include 'templates/sidebar.php'; ?>
 
-                    This content will be:
-                3-columns-wide on large screens,
-                4-columns-wide on medium screens,
-                12-columns-wide on small screens  -->
-                <ul class="collection collection-with-header">
-                    <li class="collection-item truncate"><h5>Top</h5>
-                        <p class="flow-text"><a href="#">Lorem ipsum dolor</a></p>
-                        <p class="flow-text"><a href="#">sit amet ipsum</a></p>
-                        <p class="flow-text"><a href="#">Lorem ipsum dolor</a></p>
-                    </li>
-                    <li class="collection-item"><h5>Hot</h5>
-                        <p class="flow-text"><a href="#">Lorem ipsum dolor</a></p>
-                        <p class="flow-text"><a href="#">sit amet ipsum</a></p>
-                        <p class="flow-text"><a href="#">Lorem ipsum dolor</a></p>
+          <div class="section">
+            <div class="container center">
 
-                    </li>
-                    <li class="collection-item"><h5>Recent</h5>
-                        <p class="flow-text"><a href="#">Lorem ipsum dolor</a></p>
-                        <p class="flow-text"><a href="#">sit amet ipsum</a></p>
-                    </li>
-                    <li class="collection-item"><h5>Archive</h5></li>
-                </ul>
+            <?php
+            //include 'scripts/createdb.php';
+            include_once '../scripts/php/auth/authController.php';
+            //include 'scripts/php/auth/authController.php';
+            include_once '../templates/cards.php';
+            include '../scripts/php/crudops/articles.php';
 
-            </div> <!-- Sidebar end  -->
+            listUsers();
+            ?>
 
-            <div class="col s12 m8 l10 section">
-                <!-- Note that "m8 l9" was added -->
-                <!-- Teal page content
+            <div class="row">
+              <?php
+                    for ($i=1; $i <= 3; $i++) {
+                        //small_thumb_slide('testing shit' . $i, 'http://lorempixel.com/output/technics-q-c-640-480-'. $i .'.jpg');
+                    }
+                  // for ($i=1; $i < 4; $i++) {
+                  //   big_thumb_normal();
+                  // }
+                  // for ($i=1; $i < 4; $i++) {
+                  //   big_thumb_slide();
+                  // }
+                ?>
+              </div>
+              <div class="row">
+                  <div class="col s12 right teal">
+                  <h4 class="white-text">Recent Articles</h4>
+                    <ul class="collection collection-with-header row">
+                        <?php
+                            listArticles();
+                            for ($i=1; $i <= 3; $i++) {
+                                testArticle();
 
-                    This content will be:
-                9-columns-wide on large screens,
-                8-columns-wide on medium screens,
-                12-columns-wide on small screens  -->
-                <div class="container center">
-                  <?php
-                    //include 'scripts/createdb.php';
-                    include 'scripts/DBController.php';
-                    listUsers();
-                   ?>
+                            }
+                         //write a for loop to execute a script which gets like 30 articles and displays them
 
-                </div>
+                        ?>
 
+                    </ul>
+                  </div>
+              </div>
 
-            </div> <!-- content end -->
-
-
-    </div> <!-- Body end -->
+            </div>
 
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-    <script>
-      $(document).ready(function () {
-            $('.carousel-slider').carousel({fullWidth: true});
-            $('.modal').modal();
-        });
-    </script>
+          </div> <!-- content end -->
+  </div> <!-- container end -->
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    $(document).ready(function () {
+          $('.modal').modal();
+          $('.sidenav').sidenav();
+      });
+  </script>
 </body>
 </html>

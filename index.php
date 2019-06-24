@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (isset($_SESSION['username'])) {
+    $URL = 'private/index.html';
+    echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+    exit;
+    // code...
+}
+require_once 'scripts/php/auth/configure.php'; ?>
 <html lang="en">
 <head>
     <!--Import Google Icon Font-->
@@ -15,7 +25,8 @@
 <body>
 
       <!-- Navbar goes here -->
-  <?php require_once 'templates/nav.php'; ?>
+  <?php require_once ROOT.'templates/nav.php';
+  ?>
   <!-- Page Layout here -->
   <div class="container center">
           <?php //include 'templates/sidebar.php'; ?>
@@ -27,16 +38,16 @@
             //include 'scripts/createdb.php';
             include_once 'scripts/php/auth/authController.php';
             //include 'scripts/php/auth/authController.php';
-            include 'templates/cards.php';
+            include_once 'templates/cards.php';
+            include 'scripts/php/crudops/articles.php';
+            listUsers();
             ?>
 
             <div class="row">
               <?php
-                  listUsers();
-
-                  // for ($i=1; $i < 4; $i++) {
-                  //   small_thumb_slide('testing shit' . $i, 'http://lorempixel.com/output/technics-q-c-640-480-'. $i .'.jpg');
-                  // }
+                    for ($i=1; $i <= 3; $i++) {
+                        //small_thumb_slide('testing shit' . $i, 'http://lorempixel.com/output/technics-q-c-640-480-'. $i .'.jpg');
+                    }
                   // for ($i=1; $i < 4; $i++) {
                   //   big_thumb_normal();
                   // }
@@ -44,6 +55,23 @@
                   //   big_thumb_slide();
                   // }
                 ?>
+              </div>
+              <div class="row">
+                  <div class="col s12 right teal">
+                  <h4 class="white-text">Recent Articles</h4>
+                    <ul class="collection collection-with-header row">
+                        <?php
+                            listArticles();
+                            for ($i=1; $i <= 3; $i++) {
+                                testArticle();
+
+                            }
+                         //write a for loop to execute a script which gets like 30 articles and displays them
+
+                        ?>
+
+                    </ul>
+                  </div>
               </div>
 
             </div>
@@ -57,7 +85,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
     $(document).ready(function () {
-          $('.carousel-slider').carousel({fullWidth: true});
           $('.modal').modal();
           $('.sidenav').sidenav();
       });

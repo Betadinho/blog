@@ -1,7 +1,8 @@
 <?php
+//session_start();
 require_once 'configure.php';
 
-function checkUser($username, $password) {
+function checkUser($username, $password) { //validate user login aatempt and create session if successfull
     $dbh = connect();
     if ($dbh) {
         try {
@@ -12,18 +13,22 @@ function checkUser($username, $password) {
                 $dbh->commit();
                 $hash = $getPassword->fetchAll(\PDO::FETCH_COLUMN);
                 $hash = $hash[0];
+                //unset($getPassword);
+                unset($dbh);
                 if (password_verify($password, $hash)) { //Create a User Session if Login Succeds
-                    //Create Session for User
-                  header("location: ../../../private/index.php");
+                    //Create Session for
+                    $_SESSION['username'] = $username;
+                    $URL = '../../../private/index.php';
+                    echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+                    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
                 } else {
-                    echo "couldnt log in \n";
+                    echo "Wrong Login Credentials\n";
                 }
             }
         } catch (PDOException $e) {
             die("Error while loggin in: " . $e->getMessage(). "\n");
         }
-        unset($getPassword);
-        unset($dbh);
+
 
     }
 }

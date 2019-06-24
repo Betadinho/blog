@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'configure.php';
 require 'login.php';
 require 'register.php';
@@ -16,16 +17,16 @@ switch ($method) {
         // CALL Login Method
         if (isset($_GET['login'])) {
           // code...
-          $username = fixInput($_POST['name']);
-          $password = fixInput($_POST['password']);
-          $password = fixInput($_POST['confirmPassword']);
+          $username = fixInput($_GET['name']);
+          $password = fixInput($_GET['password']);
 
-          if ($password === $passwordConfirm) {
-              checkUser($username, $password);
-          } else {
-              echo "Passwords must identical to each other";
-          }
+          checkUser($username, $password);
+
           unset($password);
+        }
+        if (isset($_GET['logout'])) {
+          unset($_SESSION['username']);
+          session_destroy();
         }
         break;
     case 'POST':
@@ -36,6 +37,13 @@ switch ($method) {
             $email = fixInput($_POST['email']);
             $password = fixInput($_POST['password']);
             $passwordConfirm = fixInput($_POST['confirmPassword']);
+
+            if ($password === $passwordConfirm) {
+              checkUser($username, $password);
+            } else {
+              echo "Passwords must identical to each other";
+            }
+            unset($password);
 
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 createUser($username, $password, $email);

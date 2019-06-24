@@ -5,13 +5,13 @@
            <i class="material-icons">menu</i>
        </a>
        <ul id="nav" class="left hide-on-med-and-down">
-         <li><a href="/blog/index.php">Home</a></li>
+         <li><a href="/blog/private/index.php">Home</a></li>
     <!-- The following line should be under the condition that a session is set-->
          <!--  <li><a href="/blog/private/index.php">Home</a></li> -->
 
 
          <li><a class="modal-trigger" href="#modalAbout">About</a>
-             <div id="modalAbout" class="modal teal darken-2" >
+             <div id="modalAbout" class="modal teal darken-1" >
                  <div class="modal-content container">
                      <h2>About this Project</h2>
                      <p class="flow-text">Basic reddit like story viewer </p>
@@ -21,7 +21,7 @@
            </li>
 
            <li><a class="modal-trigger" href="#modalContact">Contact</a>
-             <div id="modalContact" class="modal teal darken-2">
+             <div id="modalContact" class="modal teal darken-1">
                <div class="modal-content container">
                  <h2>Contact me</h2>
                  <a href="#"><span class="flow-text">My GitHub: betadinho/github.com</span></a>
@@ -31,14 +31,16 @@
                  <a href="#!" class="modal-close waves-effect waves-green btn-flat white right">Close</a>
              </div>
            </li>
+           <li>
+               <a href="!#"><b><?php echo $_SESSION['username'];?></b></a>
+           </li>
          </ul>
-         <ul id="nav-mobile" class="right hide-on-med-and-down">
-           <li><a class="modal-trigger" href="#modalLogin">Log In</a>
-             <?php include 'login.php' ?>
-           </li>
-           <li><a class="modal-trigger" href="#modalRegister">Register</a>
-             <?php include 'register.php' ?>
-           </li>
+         <ul class="right hide-on-med-and-down">
+             <li>
+                 <form action="/blog/scripts/php/auth/authController.php" method="get">
+                     <button class="waves-effect waves-light btn" type="submit" name="logout">Logout</button>
+                 </form>
+             </li>
          </ul>
    </div>
  </nav>
@@ -48,7 +50,7 @@
         <img src="!#" alt="#" style="height: 250px;">
     </li>
      <li class="">
-         <a href="/blog/index.php">Home</a>
+         <a href="/blog/private/index.php">Home</a>
      </li>
 <!-- The following line should be under the condition that a session is set-->
      <!--  <li><a href="/blog/private/index.php">Home</a></li> -->

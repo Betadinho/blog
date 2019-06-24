@@ -4,11 +4,9 @@
   $createCommentTable = NULL;
 
   try {
-    $dbh = new PDO('sqlite:/blog/db/database.db', '', '', array(
+    $dbh = new PDO('sqlite:C:\xampp\htdocs\blog\db\database.db', '', '', array(
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
     );
-    echo "connected";
-    echo "<br>";
   } catch (Exception $e) {
     die('Unable to connect: '. $e->getMessage() . "\n");
   }
@@ -23,7 +21,7 @@ if ($dbh) {
           created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         );');
   } catch (PDOException $e) {
-    die("CEncounteresd an error while preparing statement: " . $e . "\n");
+    die("Encountered an error while preparing statement: " . $e . "\n");
   }
 
 }
@@ -40,7 +38,7 @@ if ($dbh) {
           FOREIGN KEY(author) references users(username)
         );');
   } catch (PDOException $e) {
-    die("Encounteresd an error while preparing statement:" . $e . "\n");
+    die("Encountered an error while preparing statement:" . $e . "\n");
   }
 
 }

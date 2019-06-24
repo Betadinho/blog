@@ -20,7 +20,7 @@
 
            <div class="row center">
              <div class="input-field col s12">
-               <button class="waves-effect waves-light btn" type="submit" name="login">Login</button>
+               <a href="/blog/private/index.php"><button class="waves-effect waves-light btn" type="submit" name="login">Login</button></a>
              </div>
            </div>
        </form>

@@ -1,35 +1,12 @@
 <?php
 
 //Probalby deprecated artifat: Refactored and moved functionality to authController and later Crud Controller
-require 'configure.php';
+require 'auth/configure.php';
 require 'auth/login.php';
 require 'auth/register.php';
 
-$username = $email = $password = $passwordConfirm = "";
-$method = $_SERVER['REQUEST_METHOD'];
-
-switch ($method) {
-    case 'GET':
-        // code...
-        // CALL Login Method
-        break;
-    case 'POST':
-        // code...
-        //CALL REGISTER METHOD AND PAS VALUES
-        break;
-    default:
-        // code...
-        break;
-}
 
 
-
-function fixInput($data) { //remove potentially harmful characters from input
-    $data = trim($data);;
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
 
 function listUsers() {
   listUsersInterface();
@@ -81,7 +58,7 @@ function SetupDB() {
               created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
               author VARCHAR(50) NOT NULL,
               FOREIGN KEY(author) references users(username)
-          );');
+          )');
           $dbh->beginTransaction();
           $createPostTable->execute();
           $dbh->commit();
@@ -104,7 +81,7 @@ function SetupDB() {
               postTitle VARCHAR(50) NOT NULL,
               FOREIGN KEY(author) references users(author),
               FOREIGN KEY(postTitle) references posts(id)
-          );');
+          )');
             $dbh->beginTransaction();
             $createCommentTable->execute();
             $dbh->commit();
@@ -124,7 +101,7 @@ function SetupDB() {
               email VARCHAR(50) NOT NULL UNIQUE,
               password VARCHAR(255) NOT NULL,
               created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );');
+          )');
           $dbh->beginTransaction();
           $createUserTable->execute();
           $dbh->commit();
