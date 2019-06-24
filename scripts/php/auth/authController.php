@@ -1,5 +1,8 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+    // code...
+    session_start();
+}
 require_once 'configure.php';
 require 'login.php';
 require 'register.php';
@@ -41,16 +44,19 @@ switch ($method) {
             $email = fixInput($_POST['email']);
             $password = fixInput($_POST['password']);
             $passwordConfirm = fixInput($_POST['confirmPassword']);
-
-            if ($password === $passwordConfirm) {
-              checkUser($username, $password);
+            //set usertype to user by defau
+            $usertype = "user";
+            if (isset($_POST['usertype'])) {
+            // code...
+                $usertype = $_POST['usertype'];
             } else {
-              echo "Passwords must identical to each other";
-            }
-            unset($password);
 
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                createUser($username, $password, $email);
+            }
+
+            if (filter_var($email, FILTER_VALIDATE_EMAIL) && $password === $passwordConfirm) {
+                createUser($username, $password, $email, $usertype);
+            } else {
+                echo "Passwords must identical to each other";
             }
             unset($password);
         }
@@ -86,7 +92,6 @@ function listUsersInterface() {
           }
 
       } catch (PDOException $e) {
-        $dbh->rollBack();
         die("Error while listing users: " . $e->getMessage() . "\n");
       }
       unset($listUsers);

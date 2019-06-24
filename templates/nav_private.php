@@ -1,15 +1,13 @@
 <nav class="nav-wrapper teal">
    <div class="container center">
-       <a href="#" class="brand-logo center">STORIES</a>
+       <a href="/blog/private/index.php" class="brand-logo center">|STORIES|</a>
        <a href="#" class="sidenav-trigger right" data-target="mobile-links">
            <i class="material-icons">menu</i>
        </a>
        <ul id="nav" class="left hide-on-med-and-down">
-         <li><a href="/blog/private/index.php">Home</a></li>
+
     <!-- The following line should be under the condition that a session is set-->
          <!--  <li><a href="/blog/private/index.php">Home</a></li> -->
-
-
          <li><a class="modal-trigger" href="#modalAbout">About</a>
              <div id="modalAbout" class="modal teal darken-1" >
                  <div class="modal-content container">
@@ -31,11 +29,12 @@
                  <a href="#!" class="modal-close waves-effect waves-green btn-flat white right">Close</a>
              </div>
            </li>
-           <li>
-               <a href="!#"><b><?php echo $_SESSION['username'];?></b></a>
-           </li>
+           <li><a href="/blog/private/createArticle.php">Create post</a></li>
          </ul>
          <ul class="right hide-on-med-and-down">
+            <li>
+                <a href="!#" class="flow-text hide-on-med-and-down"><?php echo $_SESSION['username'];?></a>
+            </li>
              <li>
                  <form action="/blog/scripts/php/auth/authController.php" method="get">
                      <button class="waves-effect waves-light btn" type="submit" name="logout">Logout</button>
@@ -62,11 +61,7 @@
            <a href="#">Contact</a>
        </li>
        <li class="">
-           <a href="#">Log In</a>
-       </li>
-
-       <li class="">
-           <a href="#">Register</a>
+           <a href="#">Logout</a>
        </li>
 
  </ul>

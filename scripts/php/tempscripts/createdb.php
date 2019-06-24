@@ -12,11 +12,12 @@
   }
 
 if ($dbh) {
-  try {
+  try { //Add permission collumn to table
       $createUserTable = $dbh->prepare( 'CREATE TABLE IF NOT EXISTS users (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           username VARCHAR(50) NOT NULL UNIQUE,
           email VARCHAR(50) NOT NULL UNIQUE,
+          usertype VARCHAR(50) NOT NULL,
           password VARCHAR(255) NOT NULL,
           created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         );');
@@ -32,6 +33,7 @@ if ($dbh) {
       $createPostTable = $dbh->prepare( 'CREATE TABLE IF NOT EXISTS posts (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           title VARCHAR(50) NOT NULL,
+          descriptopn VARCHAR(100) NOT NULL,
           content TEXT(255) NOT NULL,
           created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
           author VARCHAR(50) NOT NULL,
@@ -64,33 +66,41 @@ if ($dbh) {
 
 if ($createUserTable) {
   try {
+    $dbh->beginTransaction();
     $createUserTable->execute();
-    echo "Table created";
+    echo "User Table created";
     echo "<br>";
   } catch (PDOException $e) {
-    die("Could not create table:" . $e . "\n");
-  }
+    die("Could not create user table:" . $e . "\n");
+    exit;
+} $dbh->commit();
 }
 
 if ($createPostTable) {
   try {
+    $dbh->beginTransaction();
     $createPostTable->execute();
-    echo "Table created";
+    echo " Post Table created";
     echo "<br>";
   } catch (PDOException $e) {
-    die("Could not create table:" . $e . "\n");
-  }
+    die("Could not create post table:" . $e . "\n");
+    exit;
+} $dbh->commit();
 }
 
 if ($createCommentTable) {
   try {
+      $dbh->beginTransaction();
     $createCommentTable->execute();
-    echo "Table created";
+    echo "Comment Table created";
     echo "<br>";
   } catch (PDOException $e) {
-    die("Could not create table:" . $e . "\n");
-  }
+    die("Could not create comment table:" . $e . "\n");
+    exit;
+} $dbh->commit();
 }
+
+unset($dbh);
 
 
 

@@ -1,7 +1,7 @@
 <?php
 require_once 'configure.php';
-
-function createUser($username, $password, $email) { //input arguments already validated and cleaned!
+//Resceives Input from registration form in /blog/templates/register.php
+function createUser($username, $password, $email, $usertype) { //input arguments already validated and cleaned!
     $dbh = connect();
     if ($dbh) {
         try {
@@ -39,10 +39,11 @@ function createUser($username, $password, $email) { //input arguments already va
             if($noMatchingUser) {
                 // code...
                 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-                $createUser = $dbh->prepare('INSERT INTO users (username, email, password) VALUES(:username, :email, :password)');
+                $createUser = $dbh->prepare('INSERT INTO users (username, email, password, usertype) VALUES(:username, :email, :password, :usertype)');
                 $createUser->bindParam(':username', $username);
                 $createUser->bindParam(':email', $email);
                 $createUser->bindParam(':password', $hashedPassword);
+                $createUser->bindParam(':usertype', $usertype);
 
                 $dbh->beginTransaction();
                 if ($createUser->execute()) {
@@ -52,12 +53,13 @@ function createUser($username, $password, $email) { //input arguments already va
                     echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
                     echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
                 } else {
-                    echo "Something went wrong";
+                    echo "Something went wrong while creating a new user";
+                    $dbh->rollBack();
+                    unset($dbh);
                 }
             } // End if
         }//End Try
         catch (PDOException $e) {
-            $dbh->rollBack();
             die("Error while creating user: " . $e->getMessage() . "\n");
         } //end catch
         unset($createUser);

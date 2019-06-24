@@ -16,12 +16,15 @@ function listArticles(){
     $getArticles = $getArticles->fetchAll(\PDO::FETCH_ASSOC);
     foreach ($getArticles as $article) {
         echo '
-            <li class="collection-item col s12">
+            <li class="container white col s12">
                 <div>
-                    <a href="#"><h4>Test Article</h4></a>
-                    <p class="flow-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos,
+                    <a href="#" class="left-align"><h4>'.$article['title'].'</h4></a>
+                </div>
+                <div>
+                    <p class=" flow-text truncate">
+                        '. $article['description'] .'
                     </p>
+                    <a href="#" class="right">By '. $article['author'] .'</a>
                 </div>
             </li>
             <div class="devider"></div>
