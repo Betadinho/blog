@@ -2,7 +2,7 @@
 <?php
 session_start();
 //Creates all database tables (users, posts, comments) if not there already
-include 'scripts/php/tempscripts/createdb.php';
+//include 'scripts/php/tempscripts/createdb.php';
 
 if (isset($_SESSION['username'])) {
     $URL = 'private/index.html';
@@ -37,7 +37,6 @@ require_once 'scripts/php/auth/configure.php'; ?>
             include_once 'scripts/php/auth/authController.php';
             include_once 'templates/cards.php';
             include 'scripts/php/crudops/articles.php';
-            listUsers();
             ?>
             <div class="row">
               <div class="col s12 right teal">

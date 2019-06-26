@@ -44,7 +44,7 @@ which calls  scripts/php/auth/register.php and passes the data
            </div>
            <div class="row center">
              <div class="input-field col s12">
-               <button class="waves-effect waves-light btn" type="submit" name="register">Register</button>
+               <button class="waves-effect waves-light btn" type="submit" name="register">Register <i class="material-icons right">send</i></button>
              </div>
            </div>
        </form>

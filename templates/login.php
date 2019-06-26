@@ -3,7 +3,7 @@
    <h3 class="center">Login</h3>
    <br>
   <div class="container center">
-       <form action="/blog/scripts/php/auth/authController.php" method="get">
+       <form id="login-form" action="/blog/scripts/php/auth/authController.php" method="get">
            <div class="row">
                <div class="input-field col s12">
                    <input id="name" type="text" name="name" required>
@@ -20,7 +20,9 @@
 
            <div class="row center">
              <div class="input-field col s12">
-               <a href="/blog/private/index.php"><button class="waves-effect waves-light btn" type="submit" name="login">Login</button></a>
+                   <button type="submit" class="waves-effect waves-light btn" name="login">
+                       Login <i class=" material-icons right">send</i>
+                   <button>
              </div>
            </div>
        </form>
@@ -29,3 +31,9 @@
     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
   </div>
 </div>
+<script>
+function submit()
+{
+ document.getElementById("login-form").submit();
+}
+</script>

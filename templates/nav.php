@@ -28,7 +28,7 @@
                  <a href="#"><span class="flow-text">My Heroku: heroku.alpha.com</span></a>
                  <a href="#"><span class="flow-text">My Email: alpha-prechtl@outlook.com</span></a>
                </div>
-                 <a href="#!" class="modal-close waves-effect waves-green btn-flat white right">Close</a>
+                 <a href="#" class="modal-close waves-effect waves-green btn-flat white right">Close</a>
              </div>
            </li>
          </ul>
@@ -45,7 +45,7 @@
  <!-- Sidenav for mobile view -->
  <ul class="sidenav" id="mobile-links">
     <li class="">
-        <img src="!#" alt="#" style="height: 250px;">
+        <img src="#" alt="#" style="height: 250px;">
     </li>
      <li class="">
          <a href="/blog/index.php">Home</a>

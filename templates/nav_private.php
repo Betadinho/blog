@@ -29,11 +29,11 @@
                  <a href="#!" class="modal-close waves-effect waves-green btn-flat white right">Close</a>
              </div>
            </li>
-           <li><a href="/blog/private/createArticle.php">Create post</a></li>
+           <li><a href="/blog/private/createArticle.php" class="btn">Create post <i class="left meddium material-icons">add</i></a></li>
          </ul>
          <ul class="right hide-on-med-and-down">
             <li>
-                <a href="!#" class="flow-text hide-on-med-and-down"><?php echo $_SESSION['username'];?></a>
+                <a href="#" class="flow-text hide-on-med-and-down"><?php echo $_SESSION['username'];?></a>
             </li>
              <li>
                  <form action="/blog/scripts/php/auth/authController.php" method="get">
@@ -46,7 +46,7 @@
  <!-- Sidenav for mobile view -->
  <ul class="sidenav" id="mobile-links">
     <li class="">
-        <img src="!#" alt="#" style="height: 250px;">
+        <img src="#" alt="#" style="height: 250px;">
     </li>
      <li class="">
          <a href="/blog/private/index.php">Home</a>

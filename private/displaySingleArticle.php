@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <?php
 session_start();
-if ( !(isset($_SESSION['username'])) ) {
-    header('location: ../');
-    exit;
-}
 require_once '../scripts/php/auth/configure.php';
 ?>
 
@@ -24,31 +20,36 @@ require_once '../scripts/php/auth/configure.php';
 <body>
 
       <!-- Navbar goes here -->
-  <?php require_once '../templates/nav_private.php'; ?>
+  <?php if (isset($_SESSION['username'])) {
+      // code...
+      require_once '../templates/nav_private.php';
+      } else {
+          require_once '../templates/nav.php';
+      }
+  ?>
   <!-- Page Layout here -->
   <div class="section">
     <div class="container center">
 
-    <?php
-    //include 'scripts/createdb.php';
-    include_once '../scripts/php/auth/authController.php';
-    //include 'scripts/php/auth/authController.php';
-    include_once '../templates/cards.php';
-    include_once '../scripts/php/crudops/articles.php';
-    ?>
-    <div class="row">
-        <div class="col s12 right teal">
-            <h4 class="white-text">Recent Articles</h4>
-            <ul class="collection collection-with-header row">
-                <?php
-                listArticles();
-                //write a for loop to execute a script which gets like 30 articles and displays them
+        <?php
+        //include 'scripts/createdb.php';
+        include_once '../scripts/php/auth/authController.php';
+        //include 'scripts/php/auth/authController.php';
+        include_once '../templates/cards.php';
+        include_once '../scripts/php/crudops/articles.php';
+        ?>
+        <div class="row">
+                    <?php
+                    if (isset($_GET['id'])) {
+                        // code...
+                        $id = $_GET['id'];
+                        displayArticle($id);
+                    }
+                    //write a for loop to execute a script which gets like 30 articles and displays them
 
-                ?>
+                    ?>
 
-            </ul>
         </div>
-    </div>
     </div>
 
   </div> <!-- container end -->

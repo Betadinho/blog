@@ -26,31 +26,24 @@ require_once '../scripts/php/auth/configure.php';
       <!-- Navbar goes here -->
   <?php require_once '../templates/nav_private.php'; ?>
   <!-- Page Layout here -->
-  <div class="section">
-    <div class="container center">
+  <div class="container center">
+      <h2>Edit Article</h2>
+          <?php //include 'templates/sidebar.php'; ?>
 
-    <?php
-    //include 'scripts/createdb.php';
-    include_once '../scripts/php/auth/authController.php';
-    //include 'scripts/php/auth/authController.php';
-    include_once '../templates/cards.php';
-    include_once '../scripts/php/crudops/articles.php';
-    ?>
-    <div class="row">
-        <div class="col s12 right teal">
-            <h4 class="white-text">Recent Articles</h4>
-            <ul class="collection collection-with-header row">
-                <?php
-                listArticles();
-                //write a for loop to execute a script which gets like 30 articles and displays them
+      <div class="section">
+        <div class="container center">
 
-                ?>
+        <?php
+        //include 'scripts/createdb.php';
+        include_once '../scripts/php/auth/authController.php';
+        include '../scripts/php/crudops/articles.php';
+        ?>
 
-            </ul>
+
         </div>
-    </div>
-    </div>
 
+
+      </div> <!-- content end -->
   </div> <!-- container end -->
 
 
@@ -58,8 +51,8 @@ require_once '../scripts/php/auth/configure.php';
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
     $(document).ready(function () {
-        $('.modal').modal();
-        $('.sidenav').sidenav();
+          $('.modal').modal();
+          $('.sidenav').sidenav();
       });
   </script>
 </body>

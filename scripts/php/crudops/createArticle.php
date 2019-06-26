@@ -11,6 +11,7 @@ if (isset($_POST) && isset($_POST['submit-post'])) {
     $title = fixCreatePostInput($_POST['post-title']);
     $content = fixCreatePostInput($_POST['post-content']);
     $username = fixCreatePostInput($_SESSION['username']);
+    $description = fixCreatePostInput($_POST['post-description']);
 
     // code...
     //get database connection
